@@ -8,6 +8,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"time"
 )
 
 type userticket struct {
@@ -155,8 +156,9 @@ func inside(w http.ResponseWriter, req *http.Request) {
 	var id int
 	var pusten, raboti, otvoren, first_response, zatvoren string
 
-	//layout := "2006-01-02 15:04:05"
-
+	inlayout := "2006-01-02 15:04:05"
+	outlayout := "Mon, Jan 2, 15:04:05 MST 2006"
+	loc, _ := time.LoadLocation("Europe/Skopje")
 	for rows.Next() {
 		err = rows.Scan(&id,
 			&pusten,
@@ -165,16 +167,16 @@ func inside(w http.ResponseWriter, req *http.Request) {
 			&first_response,
 			&zatvoren)
 		checkErr(err)
-		//otv, _ := time.Parse(layout, otvoren)
-		//fr, _ := time.Parse(layout, first_response)
-		//ztv, _ := time.Parse(layout, zatvoren)
+		otv, _ := time.ParseInLocation(inlayout, otvoren, loc)
+		fr, _ := time.ParseInLocation(inlayout, first_response, loc)
+		ztv, _ := time.ParseInLocation(inlayout, zatvoren, loc)
 		tkt := tiket{
 			Id:             id,
 			Pusten_od:      pusten,
 			Go_raboti:      raboti,
-			Otvoren:        otvoren,
-			First_response: first_response,
-			Zatvoren:       zatvoren,
+			Otvoren:        otv.Format(outlayout),
+			First_response: fr.Format(outlayout),
+			Zatvoren:       ztv.Format(outlayout),
 		}
 		tiketi = append(tiketi, tkt)
 	}
