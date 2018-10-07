@@ -16,7 +16,7 @@ type userticket struct {
 }
 
 type tiket struct {
-	Id int
+	Id                                                      int
 	Pusten_od, Go_raboti, Otvoren, First_response, Zatvoren string
 	//Otvoren, First_response, Zatvoren time.Time
 }
@@ -37,13 +37,12 @@ func init() {
 }
 
 func main() {
-	db, err = sql.Open("mysql", "root:Kumanovo123$@tcp(" +
+	db, err = sql.Open("mysql", "root:Kumanovo123$@tcp("+
 		"192.168.250.26:3306)/cases?charset=utf8")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer db.Close()
-
 
 	http.HandleFunc("/", index)
 	http.HandleFunc("/signup", signup)
@@ -155,7 +154,9 @@ func inside(w http.ResponseWriter, req *http.Request) {
 
 	var id int
 	var pusten, raboti, otvoren, first_response, zatvoren string
+
 	//layout := "2006-01-02 15:04:05"
+
 	for rows.Next() {
 		err = rows.Scan(&id,
 			&pusten,
@@ -168,12 +169,12 @@ func inside(w http.ResponseWriter, req *http.Request) {
 		//fr, _ := time.Parse(layout, first_response)
 		//ztv, _ := time.Parse(layout, zatvoren)
 		tkt := tiket{
-			Id: id,
-			Pusten_od: pusten,
-			Go_raboti: raboti,
-			Otvoren: otvoren,
+			Id:             id,
+			Pusten_od:      pusten,
+			Go_raboti:      raboti,
+			Otvoren:        otvoren,
 			First_response: first_response,
-			Zatvoren: zatvoren,
+			Zatvoren:       zatvoren,
 		}
 		tiketi = append(tiketi, tkt)
 	}
