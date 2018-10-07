@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inside</title>
+</head>
+<body>
+<h1>Yup, you're inside</h1>
+{{if .Emuser.Un}}
+Username: {{.Emuser.Un}}<br>
+Password: {{.Emuser.Ps}}<br>
+Firstname: {{.Emuser.Fn}}<br>
+Lastname: {{.Emuser.Ln}}<br>
+{{end}}
+<a href="/logout">logout</a>
+
+{{if .Tiketi}}
+<table>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Pusten</th>
+        <th scope="col">Raboti</th>
+        <th scope="col">Otvoren</th>
+        <th scope="col">First Response</th>
+        <th scope="col">Zatvoren</th>
+    </tr>
+{{range .Tiketi}}
+    <tr>
+        <td>{{.Id}}</td>
+        <td>{{.Pusten_od}}</td>
+        <td>{{.Go_raboti}}</td>
+        <td>{{.Otvoren}}</td>
+        <td>{{.First_response}}</td>
+        <td>{{.Zatvoren}}</td>
+    </tr>
+{{end}}
+</table>
+{{end}}
+
+</body>
+</html>
