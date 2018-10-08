@@ -38,8 +38,8 @@ func init() {
 }
 
 func main() {
-	db, err = sql.Open("mysql", "root:Kumanovo123$@tcp("+
-		"192.168.250.26:3306)/cases?charset=utf8")
+	db, err = sql.Open("mysql", "root:Skopje123$@tcp("+
+		"192.168.64.141:3306)/cases?charset=utf8")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -114,7 +114,7 @@ func login(w http.ResponseWriter, req *http.Request) {
 		http.Redirect(w, req, "/", http.StatusSeeOther)
 		return
 	}
-
+	var incorrect bool = false
 	if req.Method == http.MethodPost {
 		un := req.FormValue("un")
 		ps := req.FormValue("ps")
@@ -133,11 +133,13 @@ func login(w http.ResponseWriter, req *http.Request) {
 				sesie[c.Value] = un
 
 				http.Redirect(w, req, "/", http.StatusSeeOther)
+			} else {
+				incorrect = true
 			}
 		}
 	}
 
-	tpl.ExecuteTemplate(w, "login.gohtml", nil)
+	tpl.ExecuteTemplate(w, "login.gohtml", incorrect)
 }
 
 func inside(w http.ResponseWriter, req *http.Request) {

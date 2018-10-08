@@ -9,9 +9,13 @@
 <h1>Login</h1>
 <form method="post">
     <input type="email" placeholder="username" name="un"><br>
-    <input type="password" placeholder="password" name="ps">
-    <input type="submit">
+    <input type="password" placeholder="password" name="ps"><br>
+    <input type="submit" value="login">
 </form>
+
+{{if .}}
+    <strong>Username or Password is incorrect</strong>
+{{end}}
 
 </body>
 </html>
