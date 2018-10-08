@@ -1,5 +1,5 @@
 [Unit]
-Description=Tiket Portal
+Description=Ticket Portal
 
 [Service]
 ExecStart=/root/go/src/ticket-portal/portal
