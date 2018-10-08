@@ -2,8 +2,8 @@
 Description=Tiket Portal
 
 [Service]
-ExecStart=/root/go/src/my_signup/portal
-WorkingDirectory=/root/go/src/my_signup
+ExecStart=/root/go/src/ticket-portal/portal
+WorkingDirectory=/root/go/src/ticket-portal
 User=root
 Group=root
 Restart=always
