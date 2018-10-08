@@ -1,0 +1,12 @@
+[Unit]
+Description=Tiket Portal
+
+[Service]
+ExecStart=/root/go/src/my_signup/portal
+WorkingDirectory=/root/go/src/my_signup
+User=root
+Group=root
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
