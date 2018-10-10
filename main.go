@@ -153,9 +153,11 @@ func inside(w http.ResponseWriter, req *http.Request) {
 	checkErr(e)
 	defer stmt.Close()
 
-	tiketi := []tiket{}
 	rows, er := stmt.Query()
 	checkErr(er)
+	defer rows.Close()
+
+	tiketi := []tiket{}
 	var id int
 	var pusten, raboti, otvoren, first_response, zatvoren string
 
