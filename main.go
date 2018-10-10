@@ -149,12 +149,13 @@ func inside(w http.ResponseWriter, req *http.Request) {
 	}
 	u := getUser(w, req)
 
-	rows, e := db.Query(`SELECT * FROM zapisi;`)
+	stmt, e := db.Prepare(`SELECT * FROM zapisi;`)
 	checkErr(e)
-	defer rows.Close()
+	defer stmt.Close()
 
 	tiketi := []tiket{}
-
+	rows, er := stmt.Query()
+	checkErr(er)
 	var id int
 	var pusten, raboti, otvoren, first_response, zatvoren string
 
